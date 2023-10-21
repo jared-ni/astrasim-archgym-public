@@ -1,0 +1,8 @@
+dse/inputs/
+themis/results/
+**/__pycache__
+dse/archgen_v1_knobs/generated/
+dse/all_knobs/inputs
+dse/results/
+libra/libra_knobs/generated/
+libra/inputs/

@@ -1,0 +1,6 @@
+endpoint-delay: 1
+boost-mode: 1
+all-reduce-implementation: halvingDoubling_halvingDoubling_halvingDoubling
+all-gather-implementation: halvingDoubling_halvingDoubling_halvingDoubling
+reduce-scatter-implementation: halvingDoubling_halvingDoubling_halvingDoubling
+all-to-all-implementation: direct_direct_direct

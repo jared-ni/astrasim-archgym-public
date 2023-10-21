@@ -1,0 +1,22 @@
+HYBRID_DLRM	7											
+20   											
+Embedding	    -1	16777220   	ALLTOALL    100663296	300   	    ALLTOALL	100663296	300   	    ALLREDUCE	1329694368	98
+MLP_Bottom_0   	-1	143170   	NONE	    0   	    143170   	NONE	    0       	143170   	NONE	    0       	10
+MLP_Bottom_1	-1	286330   	NONE	    0   	    286330   	NONE	    0          	286330   	NONE	    0       	10
+MLP_Bottom_2	-1	286330   	NONE	    0       	286330   	NONE    	0       	286330   	NONE    	0       	10
+MLP_Bottom_3	-1	286330  	NONE	    0       	286330   	NONE    	0         	286330   	NONE    	0       	10
+MLP_Bottom_4	-1	286330  	NONE	    0       	286330   	NONE    	0   	    286330   	NONE    	0       	10
+MLP_Bottom_5	-1	286330  	NONE	    0   	    286330   	NONE    	0   	    286330   	NONE    	0       	10
+MLP_Bottom_6	-1	17900   	NONE	    0       	17900   	NONE    	0       	17900   	NONE    	0       	10
+MLP_Top_0   	-1	6889840 	NONE	    0       	6889840   	NONE    	0       	6889840   	NONE    	0       	10
+MLP_Top_1	    -1	286330  	NONE	    0       	286330   	NONE    	0       	286330   	NONE    	0       	10
+MLP_Top_2	    -1	286330  	NONE	    0       	286330   	NONE    	0       	286330   	NONE    	0       	10
+MLP_Top_3   	-1	286330  	NONE	    0       	286330   	NONE    	0       	286330   	NONE    	0       	10
+MLP_Top_4   	-1	286330  	NONE	    0       	286330   	NONE    	0       	286330   	NONE	    0       	10
+MLP_Top_5   	-1	286330  	NONE	    0       	286330   	NONE    	0       	286330   	NONE	    0       	10
+MLP_Top_6   	-1	286330  	NONE	    0       	286330   	NONE    	0       	286330   	NONE	    0       	10
+MLP_Top_7   	-1	286330  	NONE	    0       	286330   	NONE    	0       	286330   	NONE	    0       	10
+MLP_Top_8   	-1	286330  	NONE	    0       	286330   	NONE    	0       	286330   	NONE	    0       	10
+MLP_Top_9   	-1	286330  	NONE	    0       	286330   	NONE    	0       	286330   	NONE	    0       	10
+MLP_Top_10  	-1	286330  	NONE	    0       	286330   	NONE    	0       	286330   	NONE	    0       	10
+MLP_Top_11  	-1	70   	    NONE	    0       	70      	NONE    	0       	70   	    NONE	    0       	10

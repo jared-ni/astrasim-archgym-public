@@ -1,0 +1,6 @@
+endpoint-delay: 1
+boost-mode: 1
+all-reduce-implementation: ring_direct_ring_halvingDoubling
+all-gather-implementation: ring_direct_ring_halvingDoubling
+reduce-scatter-implementation: ring_direct_ring_halvingDoubling
+all-to-all-implementation: direct_direct_direct_direct
