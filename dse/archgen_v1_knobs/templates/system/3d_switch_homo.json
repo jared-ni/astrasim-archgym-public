@@ -1,0 +1,8 @@
+{
+  "endpoint-delay": 1,
+  "all-reduce-implementation": ["halvingDoubling", "halvingDoubling", "halvingDoubling"],
+  "all-gather-implementation": ["halvingDoubling", "halvingDoubling", "halvingDoubling"],
+  "reduce-scatter-implementation": ["halvingDoubling", "halvingDoubling", "halvingDoubling"],
+  "all-to-all-implementation": ["direct", "direct", "direct"],
+  "boost-mode": 1
+}

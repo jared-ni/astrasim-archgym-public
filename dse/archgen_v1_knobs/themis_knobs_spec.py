@@ -4,11 +4,13 @@
 ##      tuple: the knob value should be in the defined type and range
 ##              the tuple always follow format of (type_fn, min, max, default_value), is no range/default_value defined, use None
 
+## TODO: For some reason, the themis-related knobs get lost in new astrasim.
+##       Will ask if there is particular reason to remove those and add these back.
 SYSTEM_KNOBS = {
     "scheduling-policy": {"FIFO", "LIFO"},
     "collective-optimization": {"localBWAware", "baseline"},
-    "intra-dimension-scheduling": {"FIFO", "SCF"},
-    "inter-dimension-scheduling": {"baseline", "themis"}
+    # "intra-dimension-scheduling": {"FIFO", "SCF"},        
+    # "inter-dimension-scheduling": {"baseline", "themis"}
 }
 
 
