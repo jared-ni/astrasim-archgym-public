@@ -37,7 +37,7 @@ def random_cfg_generator(template_name, template_root):
         os.path.join(template_root, "network", template_name + ".yml"), "r"
     )
 
-    system, network = deserialize_cfgs(system_f, network_f)
+    system, network, _ = deserialize_cfgs(system_file=system_f, network_file=network_f)
 
     system_f.close()
     network_f.close()
@@ -105,6 +105,11 @@ if __name__ == "__main__":
                 os.path.join(generated_dir, "network", f"{template_name}_{i}.yml"), "w"
             )
 
-            serialize_cfgs(system, network, system_f, network_f)
+            serialize_cfgs(
+                system=system,
+                network=network,
+                system_file=system_f,
+                network_file=network_f,
+            )
             system_f.close()
             network_f.close()
