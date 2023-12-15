@@ -6,6 +6,7 @@ astrasim_bin = '../../astra-sim/build/astra_analytical/build/AnalyticalAstra/bin
 workload_dir = '../workload/realworld_workloads'
 system_dir = '../archgen_v1_knobs/generated/1/system'
 network_dir = '../archgen_v1_knobs/generated/1/network'
+memory_conf = '../memory.json'
 
 
 def run_task(workload, system, network, run_name_prefix=''):
@@ -15,7 +16,7 @@ def run_task(workload, system, network, run_name_prefix=''):
     log_path = os.path.join(run_dir, 'std.out')
     os.makedirs(run_dir, exist_ok=True)
     run_name = f"{run_name_prefix}{config_name}_{workload_name}"
-    cmd = f"{astrasim_bin} --workload-configuration={workload} --system-configuration={system} --network-configuration={network} --path={run_dir} --run-name={run_name} > {log_path} 2>&1"
+    cmd = f"{astrasim_bin} --workload-configuration={workload} --system-configuration={system} --network-configuration={network} --path={run_dir} --run-name={run_name} --remote-memory-configuration={memory_conf}> {log_path} 2>&1"
     print(cmd)
     os.system(cmd)
     return True
@@ -27,21 +28,21 @@ def get_experiment_space(workload_dir_, system_dir_, network_dir_):
     networks = os.listdir(network_dir_)
     rets = list()
     for workload in workloads:
-        if not workload.endswith('.txt'):
+        if not workload.endswith('.0.eg'):
             continue
 
         for network in networks:
-            if not network.endswith('.json'):
+            if not network.endswith('.yml'):
                 continue
-            network_name = network[:-5]
+            network_name = network[:-4]
 
             for system in systems:
                 if not system.startswith(network_name):
                     continue
-                if not system.endswith('.txt'):
+                if not system.endswith('.json'):
                     continue
                 print(workload_dir_, system_dir_, network_dir_)
-                workload_fullpath = os.path.join(workload_dir_, workload)
+                workload_fullpath = os.path.join(workload_dir_, workload[:-5])
                 system_fullpath = os.path.join(system_dir_, system)
                 network_fullpath = os.path.join(network_dir_, network)
                 rets.append((workload_fullpath, system_fullpath, network_fullpath))

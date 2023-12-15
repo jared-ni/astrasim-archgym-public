@@ -1,12 +1,14 @@
 import random, sys
+
 sys.path.append("..")
-from archgen_v1_knobs_spec import SYSTEM_KNOBS, NETWORK_KNOBS
+from archgen_v1_knobs_spec import SYSTEM_KNOBS, NETWORK_KNOBS, WORKLOAD_KNOBS
 from conf_file_tools import deserialize_cfgs
+
 
 def random_cfg_generator(template_name, template_root):
     def _random_sample_set(set_):
         return random.choice(list(set_))
-    
+
     def _sample_value(value_spec, list_sample_count=-1):
         if isinstance(value_spec, set):
             value = _random_sample_set(value_spec)
@@ -16,7 +18,7 @@ def random_cfg_generator(template_name, template_root):
                 value = random.randint(value_spec[1], value_spec[2])
             elif value_spec[0] == float:
                 value = random.random()
-                value = value_spec[1] + (value_spec[2]-value_spec[1])*value
+                value = value_spec[1] + (value_spec[2] - value_spec[1]) * value
             else:
                 # unsupported type
                 assert False
@@ -29,20 +31,22 @@ def random_cfg_generator(template_name, template_root):
             # unsupported value spec
             assert False
         return value
-    
-    system_f = open(os.path.join(template_root, 'system', template_name+".txt"), 'r')
-    network_f = open(os.path.join(template_root, 'network', template_name+".json"), 'r')
-    
+
+    system_f = open(os.path.join(template_root, "system", template_name + ".json"), "r")
+    network_f = open(
+        os.path.join(template_root, "network", template_name + ".yml"), "r"
+    )
+
     system, network = deserialize_cfgs(system_f, network_f)
-    
+
     system_f.close()
     network_f.close()
-    
-    dimensions_count = network['dimensions-count']
+
+    dimensions_count = len(network["topology"])
 
     # system
     remain_system_keys = set(SYSTEM_KNOBS.keys())
-    for key in system.keys():   # remove already have keys in template
+    for key in system.keys():  # remove already have keys in template
         if key in remain_system_keys:
             remain_system_keys.remove(key)
 
@@ -67,32 +71,39 @@ def random_cfg_generator(template_name, template_root):
     return network, system
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     import os
     from conf_file_tools import serialize_cfgs
     import shutil
+
     num_configs_each_template = 10
-    template_dir = './templates'
-    generated_dir = './generated/1'
-    
+    template_dir = "./templates"
+    generated_dir = "./generated/1"
+
     system_template_filenames = os.listdir(os.path.join(template_dir, "system"))
     template_names = list()
     for system_filename in system_template_filenames:
-        if not system_filename.endswith('.txt'):
+        if not system_filename.endswith(".json"):
             continue
-        template_name = system_filename[:-4]
-        assert os.path.isfile(os.path.join(template_dir, "network", template_name+".json"))
+        template_name = system_filename[:-5]
+        assert os.path.isfile(
+            os.path.join(template_dir, "network", template_name + ".yml")
+        )
         template_names.append(template_name)
-    
-    os.makedirs(os.path.join(generated_dir, 'system'), exist_ok=True)
-    os.makedirs(os.path.join(generated_dir, 'network'), exist_ok=True)
+
+    os.makedirs(os.path.join(generated_dir, "system"), exist_ok=True)
+    os.makedirs(os.path.join(generated_dir, "network"), exist_ok=True)
 
     for template_name in template_names:
         # shutils.copy(os.path.join(template_dir, 'network', template_name+".json"), os.path.join(generated_dir, 'network', template_name+".json"))
         for i in range(num_configs_each_template):
             network, system = random_cfg_generator(template_name, template_dir)
-            system_f = open(os.path.join(generated_dir, 'system', f"{template_name}_{i}.txt"), 'w')
-            network_f = open(os.path.join(generated_dir, 'network', f"{template_name}_{i}.json"), 'w')
+            system_f = open(
+                os.path.join(generated_dir, "system", f"{template_name}_{i}.json"), "w"
+            )
+            network_f = open(
+                os.path.join(generated_dir, "network", f"{template_name}_{i}.yml"), "w"
+            )
 
             serialize_cfgs(system, network, system_f, network_f)
             system_f.close()

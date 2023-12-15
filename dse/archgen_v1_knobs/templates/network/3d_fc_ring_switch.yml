@@ -1,19 +1,7 @@
-# Analytical Network Input File
+topology: [ FullyConnected, Ring, Switch ]
 
-# 3D topology with 64 NPUs (2 x 8 x 4)
-# 1st Dim is (bi-directional) Ring, 2nd Dim is FullyConnected, and the last dim is Switch.
-# Each link BW is (200, 100, 50) GB/s (per each dimension and per each direction)
-# and link BW is (50, 500, 2000) ns.
+npus_count: [ 8, 16, 8 ]
 
+bandwidth: [ 25.0, 25.0, 50.0 ]
 
-# 3D topology
-topology: [ FullyConnected, Ring, Switch ]  # Ring, Switch, FullyConnected
-
-# 2 x 8 x 4 = 64 NPUs
-npus_count: [ 8, 16, 8 ]  # number of NPUs
-
-# Bandwidth per each dimension and direction (per link)
-bandwidth: [ 25.0, 25.0, 50.0 ]  # GB/s
-
-# Latency per each dimension and direction
-latency: [ 1.0, 1.0, 1.0 ]  # ns
+latency: [ 1.0, 1.0, 1.0 ]
