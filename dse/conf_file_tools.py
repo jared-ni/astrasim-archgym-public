@@ -2,7 +2,7 @@ import os, json, yaml
 
 
 def workload_cfg_to_workload(workload: dict, output_et_file: str):
-    SYMBOLIC_GENERATOR_PATH = "../symbolic_tensor_network"
+    SYMBOLIC_GENERATOR_PATH = os.path.join(os.path.split(os.path.abspath(__file__))[0], "../symbolic_tensor_network")
     dp = workload["dp"]
     mp = workload["num_npus"] // workload["dp"]
     weight_sharded = workload["weight_sharded"]
