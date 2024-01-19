@@ -3,4 +3,4 @@
 	url = https://github.com/astra-sim/astra-sim.git
 [submodule "symbolic_tensor_network"]
 	path = symbolic_tensor_network
-	url = git@github.com:changhai0109/symbolic_tensor_network.git
+	url = https://github.com/changhai0109/symbolic_tensor_network.git
