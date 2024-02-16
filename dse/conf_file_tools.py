@@ -4,12 +4,15 @@ import os, json, yaml
 def workload_cfg_to_workload(workload: dict, output_et_file: str):
     SYMBOLIC_GENERATOR_PATH = os.path.join(os.path.split(os.path.abspath(__file__))[0], "../symbolic_tensor_network")
     dp = workload["dp"]
-    mp = workload["num_npus"] // workload["dp"]
+    sp = workload["sp"]
+    pp = workload["pp"]
+    mp = workload["num_npus"] // (dp*sp*pp)
     weight_sharded = workload["weight_sharded"]
     output_dir, output_file = os.path.split(output_et_file)
     if not "%d" in output_file:
-        output_file = f"{output_file}.%d.eg"
-    cmd = f"PYTHONPATH={SYMBOLIC_GENERATOR_PATH} python {SYMBOLIC_GENERATOR_PATH}/main.py --output_dir {output_dir} --output_name {output_file} --dp {dp} --mp {mp} --weight_sharded {weight_sharded}"
+        output_file = f"{output_file}.%d.et"
+    comm_file = output_file.replace(".%d.et", ".json")
+    cmd = f"PYTHONPATH={SYMBOLIC_GENERATOR_PATH} python {SYMBOLIC_GENERATOR_PATH}/main.py --output_dir {output_dir} --output_name {output_file} --dp {dp} --mp {mp} --sp {sp} --pp {pp} --weight_sharded {weight_sharded} --comm_group_file {comm_file} --chakra_schema_version v0.0.4"
     os.system(cmd)
 
 
