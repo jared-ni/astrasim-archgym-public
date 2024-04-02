@@ -13,6 +13,22 @@ def workload_cfg_to_workload(workload: dict, output_et_file: str):
         output_file = f"{output_file}.%d.et"
     comm_file = output_file.replace(".%d.et", ".json")
     cmd = f"PYTHONPATH={SYMBOLIC_GENERATOR_PATH} python {SYMBOLIC_GENERATOR_PATH}/main.py --output_dir {output_dir} --output_name {output_file} --dp {dp} --mp {mp} --sp {sp} --pp {pp} --weight_sharded {weight_sharded} --comm_group_file {comm_file} --chakra_schema_version v0.0.4"
+    if "din" in workload:
+        cmd += f" --din {workload['din']}"
+    if "dout" in workload:
+        cmd += f" --dout {workload['dout']}"
+    if "dmodel" in workload:
+        cmd += f" --dmodel {workload['dmodel']}"
+    if "dff" in workload:
+        cmd += f" --dff {workload['dff']}"
+    if "batch" in workload:
+        cmd += f" --batch {workload['batch']}"
+    if "seq" in workload:
+        cmd += f" --seq {workload['seq']}"
+    if "head" in workload:
+        cmd += f" --head {workload['head']}"
+    if "num_stacks" in workload:
+        cmd += f" --num_stacks {workload['num_stacks']}"
     os.system(cmd)
 
 
