@@ -15,7 +15,15 @@ class MemoryEstimator:
         self.dff = symbol_map_value["dff"]
         self.dmodel = symbol_map_value["dmodel"]
         self.batch = symbol_map_value["batch"]
-        self.seq = symbol_map_value["seq"]
+        if not 'seq' in symbol_map_value:
+            if 'prefilling' in symbol_map_value:
+                self.seq = symbol_map_value["prefilling"]
+            elif 'decoding' in symbol_map_value:
+                self.seq = symbol_map_value["decoding"]
+            else:
+                assert False
+        else:
+            self.seq = symbol_map_value["seq"]
         self.head = symbol_map_value["head"]
         self.num_stacks = symbol_map_value["num_stacks"]
         self.weight_sharded = str_to_bool(symbol_map_value["weight_sharded"])
