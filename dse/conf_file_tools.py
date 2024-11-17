@@ -214,5 +214,5 @@ def assemble_inference_workload(workload: dict, output_et_file: str):
             encode_message(f, global_metadata)
             for node in all_nodes.values():
                 encode_message(f, node)
-        os.system(f"cp {os.path.join(output_dir, prefilling_output_file.replace(".%d.et", ".json"))} {os.path.join(output_dir, final_output_file.replace(".%d.et", ".json"))}")
+        os.system(f"cp {os.path.join(output_dir, prefilling_output_file.replace('.%d.et', '.json'))} {os.path.join(output_dir, final_output_file.replace('.%d.et', '.json'))}")
 
